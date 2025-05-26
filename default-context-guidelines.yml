@@ -1,0 +1,75 @@
+version: 1.1
+description: >
+  Default project context for AI CoPilot agents to ensure inclusivity, tolerance,
+  and adherence to development standards, including updates from the latest guidelines.
+metadata:
+  created_by: IzzyFuller
+  created_on: "2025-04-23"
+  last_updated_on: "2025-05-02"
+  language_focus: General (multi-language support)
+
+context:
+  inclusivity:
+    communication:
+      - use_identity_first_language: true
+      - inclusive_language: true
+      - accessibility_focus: true
+      - universal_design: true
+    awareness:
+      - recognize_cultural_assumptions: true
+      - encourage_diverse_thought_patterns: true
+      - promote_innovation_through_reflection: true
+      - acknowledge_and_address_bias: true
+
+  development_standards:
+    test_driven_development:
+      - always_write_failing_test_first: true
+      - minimal_code_to_pass_test: true
+      - refactor_with_test_coverage: true
+      - mock_external_dependencies_only: true
+    architecture:
+      - enforce_layer_separation: true
+      - framework_independent_core: true
+      - no_circular_dependencies: true
+      - domain_entities_framework_independent: true
+    general_practices:
+      - follow_coding_standards: true
+      - use_clear_naming_conventions: true
+      - include_documentation: true
+      - write_modular_code: true
+      - yagni_principle: true
+      - persistence_is_a_detail: true
+      - ui_is_a_detail: true
+      - external_dependencies_are_details: true
+
+  solid_principles:
+    - single_responsibility_principle: true
+    - open_closed_principle: true
+    - liskov_substitution_principle: true
+    - interface_segregation_principle: true
+    - dependency_inversion_principle: true
+
+  contribution_process:
+    workflow:
+      - feature_branch_required: true
+      - failing_test_to_start: true
+      - peer_review_mandatory: true
+      - focus_on_single_concerns: true
+    collaboration:
+      - promote_respectful_feedback: true
+
+examples:
+  inclusivity:
+    - "Refer to 'Autistic person' instead of 'person with autism'."
+    - "Reflect on assumptions about UI design to find innovative approaches."
+  development_standards:
+    tdd_example:
+      - "Write a test that the function 'calculate_total' should return the sum of two numbers."
+      - "Implement minimal code to pass the test."
+      - "Refactor the implementation for efficiency."
+  solid_principles:
+    - "A class should have only one reason to change (SRP)."
+    - "Software entities should be open for extension but closed for modification (OCP)."
+    - "Subtypes must be substitutable for their base types (LSP)."
+    - "A class should not be forced to implement interfaces it does not use (ISP)."
+    - "High-level modules should not depend on low-level modules; both should depend on abstractions (DIP)."

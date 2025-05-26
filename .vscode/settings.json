@@ -1,0 +1,7 @@
+{
+  "github.copilot.chat.contextFiles": [
+    "GUIDELINES.md",
+    "default-context-guidelines.yml",
+    "README.md"
+  ]
+}
