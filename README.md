@@ -1,27 +1,12 @@
-# PufferFishTemplate
+# Persistence Furthers
 
-Welcome to the **PufferFishTemplate**! This repository serves as a starting point for creating new projects while following the standards and guidelines I like to keep in mind. It provides resources to help you kick off your project inclusively and with test-driven development (TDD) in mind.
+This is a Typescript application that will monitor a configurable list of message exchanges and persist all messages that are received in each. The first exchanges will be all messages recieved by the AuDHD LifeCoach core app and the messages emitted by the AuDHD Lifecoach core app upon discovery of a Commitment. 
+
+As an initial interation, this service will simply persist these messages as events in an EventStoreDB instance, with an event type of messageReceivedFrom{ExchangeName}. 
 
 ## Features
-- Inclusivity-focused project structure
-- Resources for maintaining consistency and quality
-- TDD-friendly setup
+- recieve messages from a configurable list of exchanges, described in https://github.com/IzzyFuller/AuDHD-LIfeCoach-Infrastructure
+- persist these messages in an event store
+- extendable to project data into interesting data structures as needed.
 
 ---
-
-## Getting Started
-
-### Using This Template
-
-You can create a new repository based on this template using either the GitHub web UI or the Git CLI. Follow the instructions below:
-
-#### 1. GitHub Web UI
-1. Click the **"Use this template"** button at the top of this page.
-2. Select **"Create a new repository"**.
-3. Fill out the details for your new repository (name, description, visibility, etc.).
-4. Click **"Create repository from template"**.
-
-#### 2. Git CLI
-1. Clone this template repository:
-   ```bash
-   git clone https://github.com/IzzyFuller/PufferFishTemplate.git
