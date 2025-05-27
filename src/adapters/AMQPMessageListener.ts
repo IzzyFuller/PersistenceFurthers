@@ -1,7 +1,6 @@
-
-import amqp from 'amqplib';
+import * as amqp from 'amqplib';
 import { MessageEntity } from '../domain/entities/Message';
-import { ExchangeConfig } from '../domain/entities/ExchangeConfiguration';
+import { ExchangeConfigurationEntity } from '../domain/entities/ExchangeConfiguration';
 import { PersistMessageUseCase } from '../usecases/PersistMessageUseCase';
 
 export interface MessageListener {
@@ -10,10 +9,10 @@ export interface MessageListener {
 }
 
 export class AMQPMessageListener implements MessageListener {
-  private connections: amqp.Connection[] = [];
+  private connections: amqp.ChannelModel[] = [];
 
   constructor(
-    private readonly exchanges: ExchangeConfig[],
+    private readonly exchanges: ExchangeConfigurationEntity[],
     private readonly persistMessageUseCase: PersistMessageUseCase
   ) {}
 
@@ -30,7 +29,7 @@ export class AMQPMessageListener implements MessageListener {
     this.connections = [];
   }
 
-  private async connectToExchange(exchangeConfig: ExchangeConfig): Promise<void> {
+  private async connectToExchange(exchangeConfig: ExchangeConfigurationEntity): Promise<void> {
     try {
       const connection = await amqp.connect(exchangeConfig.connectionString);
       this.connections.push(connection);

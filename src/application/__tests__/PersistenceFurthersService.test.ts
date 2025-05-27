@@ -1,22 +1,21 @@
-
 import { PersistenceFurthersService } from '../PersistenceFurthersService';
 import { EventStoreDBClient } from '@eventstore/db-client';
 
 // Mock all dependencies
 jest.mock('@eventstore/db-client');
-jest.mock('../adapters/EventStoreMessageRepository');
-jest.mock('../adapters/ConfigFileExchangeRepository');
-jest.mock('../adapters/AMQPMessageListener');
-jest.mock('../usecases/PersistMessageUseCase');
-jest.mock('../usecases/MonitorExchangesUseCase');
+jest.mock('../../adapters/EventStoreMessageRepository');
+jest.mock('../../adapters/ConfigFileExchangeRepository');
+jest.mock('../../adapters/AMQPMessageListener');
+jest.mock('../../usecases/PersistMessageUseCase');
+jest.mock('../../usecases/MonitorExchangesUseCase');
 
 // Import mocked classes
-import { EventStoreMessageRepository } from '../adapters/EventStoreMessageRepository';
-import { ConfigFileExchangeRepository } from '../adapters/ConfigFileExchangeRepository';
-import { AMQPMessageListener } from '../adapters/AMQPMessageListener';
-import { PersistMessage } from '../usecases/PersistMessageUseCase';
-import { MonitorExchanges } from '../usecases/MonitorExchangesUseCase';
-import { ExchangeConfigurationEntity } from '../domain/entities/ExchangeConfiguration';
+import { EventStoreMessageRepository } from '../../adapters/EventStoreMessageRepository';
+import { ConfigFileExchangeRepository } from '../../adapters/ConfigFileExchangeRepository';
+import { AMQPMessageListener } from '../../adapters/AMQPMessageListener';
+import { PersistMessage } from '../../usecases/PersistMessageUseCase';
+import { MonitorExchanges } from '../../usecases/MonitorExchangesUseCase';
+import { ExchangeConfigurationEntity } from '../../domain/entities/ExchangeConfiguration';
 
 describe('PersistenceFurthersService', () => {
   let service: PersistenceFurthersService;

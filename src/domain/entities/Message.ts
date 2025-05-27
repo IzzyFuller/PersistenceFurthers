@@ -5,6 +5,7 @@ export interface Message {
   readonly content: unknown;
   readonly timestamp: Date;
   readonly metadata: Record<string, unknown>;
+  toEventType(): string;
 }
 
 export class MessageEntity implements Message {

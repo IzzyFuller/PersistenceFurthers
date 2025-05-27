@@ -1,4 +1,3 @@
-
 import { AMQPMessageListener } from '../AMQPMessageListener';
 import { ExchangeConfigurationEntity } from '../../domain/entities/ExchangeConfiguration';
 import { PersistMessageUseCase } from '../../usecases/PersistMessageUseCase';
@@ -8,27 +7,39 @@ import amqp from 'amqplib';
 jest.mock('amqplib');
 
 describe('AMQPMessageListener', () => {
-  let mockPersistMessageUseCase: jest.Mocked<PersistMessageUseCase>;
-  let mockConnection: jest.Mocked<amqp.Connection>;
-  let mockChannel: jest.Mocked<amqp.Channel>;
+  let mockPersistMessageUseCase: any;
+  let mockConnection: any;
+  let mockChannel: any;
   let listener: AMQPMessageListener;
   let exchanges: ExchangeConfigurationEntity[];
 
   beforeEach(() => {
+    // Clear all mocks
+    jest.clearAllMocks();
+    
     mockPersistMessageUseCase = {
       execute: jest.fn(),
     };
 
+    // Mock Channel with proper structure
     mockChannel = {
-      assertQueue: jest.fn(),
-      consume: jest.fn(),
+      assertQueue: jest.fn().mockResolvedValue({ queue: 'test.queue', messageCount: 0, consumerCount: 0 }),
+      consume: jest.fn().mockResolvedValue({ consumerTag: 'test-tag' }),
       ack: jest.fn(),
-    } as any;
+      close: jest.fn().mockResolvedValue(undefined),
+    };
 
+    // Mock Connection with proper structure  
     mockConnection = {
       createChannel: jest.fn().mockResolvedValue(mockChannel),
-      close: jest.fn(),
-    } as any;
+      close: jest.fn().mockResolvedValue(undefined),
+      // Add minimal Connection properties to satisfy TypeScript
+      serverProperties: {},
+      expectSocketClose: jest.fn(),
+      sentSinceLastCheck: jest.fn(),
+      recvSinceLastCheck: jest.fn(),
+      sendMessage: jest.fn(),
+    };
 
     (amqp.connect as jest.Mock).mockResolvedValue(mockConnection);
 
@@ -64,7 +75,7 @@ describe('AMQPMessageListener', () => {
     } as amqp.ConsumeMessage;
 
     // Setup consume to call the callback immediately
-    mockChannel.consume.mockImplementation(async (queue, callback) => {
+    mockChannel.consume.mockImplementation(async (queue: string, callback: any) => {
       if (callback) {
         await callback(mockMessage);
       }
@@ -89,7 +100,7 @@ describe('AMQPMessageListener', () => {
       content: Buffer.from(JSON.stringify(messageContent))
     } as amqp.ConsumeMessage;
 
-    mockChannel.consume.mockImplementation(async (queue, callback) => {
+    mockChannel.consume.mockImplementation(async (queue: string, callback: any) => {
       if (callback) {
         await callback(mockMessage);
       }
@@ -103,7 +114,7 @@ describe('AMQPMessageListener', () => {
   });
 
   it('should handle null messages gracefully', async () => {
-    mockChannel.consume.mockImplementation(async (queue, callback) => {
+    mockChannel.consume.mockImplementation(async (queue: string, callback: any) => {
       if (callback) {
         await callback(null);
       }
