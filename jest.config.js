@@ -9,5 +9,9 @@ module.exports = {
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/**/*.test.ts',
+    '!src/index.ts',           // Ignore index.ts
+    '!src/**/index.ts',        // Ignore any index.ts files
   ],
+  coverageDirectory: 'coverage',
+  coverageReporters: ['text', 'lcov', 'html'],
 };
