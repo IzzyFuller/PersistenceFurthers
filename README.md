@@ -1,6 +1,6 @@
 # Persistence Furthers
 
-[![codecov](https://codecov.io/gh/YOUR_USERNAME/PersistenceFurthers/branch/main/graph/badge.svg)](https://codecov.io/gh/IzzyFuller/PersistenceFurthers)
+[![codecov](https://codecov.io/gh/IzzyFuller/PersistenceFurthers/branch/main/graph/badge.svg)](https://codecov.io/gh/IzzyFuller/PersistenceFurthers)
 
 This is a Typescript application that will monitor a configurable list of message exchanges and persist all messages that are received in each. The first exchanges will be all messages recieved by the AuDHD LifeCoach core app and the messages emitted by the AuDHD Lifecoach core app upon discovery of a Commitment. 
 
