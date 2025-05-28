@@ -1,0 +1,16 @@
+{
+  "exchanges": [
+    {
+      "name": "AuDHDLifeCoachCore",
+      "connectionString": "amqp://rabbitmq:5672",
+      "queueName": "core.messages",
+      "active": true
+    },
+    {
+      "name": "CommitmentDiscovery",
+      "connectionString": "amqp://rabbitmq:5672",
+      "queueName": "commitments.discovered",
+      "active": true
+    }
+  ]
+}

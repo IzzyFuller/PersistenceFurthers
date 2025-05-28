@@ -6,9 +6,12 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "ts-node src/index.js",
+    "dev": "ts-node src/index.ts",
     "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "docker:build": "docker build -t persistence-furthers .",
+    "docker:run": "docker run --rm persistence-furthers",
+    "deploy": "npm run docker:build && docker-compose up -d"
   },
   "dependencies": {
     "@eventstore/db-client": "^6.0.0",

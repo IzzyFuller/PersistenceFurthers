@@ -1,0 +1,10 @@
+{
+  "exchanges": [
+    {
+      "name": "AuDHDLifeCoachCore-Dev",
+      "connectionString": "amqp://localhost:5672",
+      "queueName": "core.messages.dev",
+      "active": true
+    }
+  ]
+}
