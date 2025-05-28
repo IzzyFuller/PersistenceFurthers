@@ -9,21 +9,28 @@ export class ConfigFileExchangeRepository implements ExchangeConfigRepository {
   constructor() {
     const env = process.env.NODE_ENV || 'development';
     this.configPath = path.join(process.cwd(), 'config', `${env}.json`);
+    console.log(`ConfigFileExchangeRepository: Looking for config at ${this.configPath}`);
   }
 
   async getActiveExchanges(): Promise<ExchangeConfigurationEntity[]> {
     try {
+      console.log(`ConfigFileExchangeRepository: Attempting to read ${this.configPath}`);
       const configFile = await fs.readFile(this.configPath, 'utf-8');
       const config = JSON.parse(configFile);
       
-      return config.exchanges
-        .filter((exchange: any) => exchange.enabled) // This reads from JSON
+      console.log(`ConfigFileExchangeRepository: Loaded config:`, config);
+      
+      const activeExchanges = config.exchanges
+        .filter((exchange: any) => exchange.enabled)
         .map((exchange: any) => new ExchangeConfigurationEntity(
           exchange.name,
           exchange.connectionString,
           exchange.queueName,
-          exchange.enabled  // This maps to the entity constructor
+          exchange.enabled
         ));
+      
+      console.log(`ConfigFileExchangeRepository: Found ${activeExchanges.length} active exchanges`);
+      return activeExchanges;
     } catch (error) {
       console.error(`Failed to load exchange configuration from ${this.configPath}:`, error);
       return [];

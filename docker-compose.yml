@@ -5,55 +5,7 @@ services:
     build: .
     container_name: persistence-furthers
     environment:
-      - EVENTSTORE_CONNECTION_STRING=esdb://eventstore:2113?tls=false
+      - EVENTSTORE_CONNECTION_STRING=esdb://host.docker.internal:2113?tls=false
+      - RABBITMQ_CONNECTION_STRING=amqp://host.docker.internal:5672
       - NODE_ENV=production
-    depends_on:
-      - eventstore
-      - rabbitmq
-    networks:
-      - audhdlifecoach-network
-    volumes:
-      - ./config:/app/config:ro
     restart: unless-stopped
-
-  # Reference external services (if they're not running)
-  eventstore:
-    image: eventstore/eventstore:latest
-    container_name: eventstore
-    environment:
-      - EVENTSTORE_CLUSTER_SIZE=1
-      - EVENTSTORE_RUN_PROJECTIONS=All
-      - EVENTSTORE_START_STANDARD_PROJECTIONS=true
-      - EVENTSTORE_EXT_TCP_PORT=1113
-      - EVENTSTORE_HTTP_PORT=2113
-      - EVENTSTORE_INSECURE=true
-      - EVENTSTORE_ENABLE_EXTERNAL_TCP=true
-      - EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP=true
-    ports:
-      - "1113:1113"
-      - "2113:2113"
-    volumes:
-      - eventstore-volume-data:/var/lib/eventstore
-      - eventstore-volume-logs:/var/log/eventstore
-    networks:
-      - audhdlifecoach-network
-
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    environment:
-      - RABBITMQ_DEFAULT_USER=admin
-      - RABBITMQ_DEFAULT_PASS=password
-    networks:
-      - audhdlifecoach-network
-
-networks:
-  audhdlifecoach-network:
-    external: true
-
-volumes:
-  eventstore-volume-data:
-  eventstore-volume-logs:

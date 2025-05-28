@@ -1,10 +1,16 @@
 {
   "exchanges": [
     {
-      "name": "AuDHDLifeCoachCore-Dev",
-      "connectionString": "amqp://localhost:5672",
-      "queueName": "core.messages.dev",
-      "active": true
+      "name": "audhd.input",
+      "connectionString": "amqp://host.docker.internal:5672",
+      "queueName": "core.messages",
+      "enabled": true
+    },
+    {
+      "name": "audhd.output",
+      "connectionString": "amqp://host.docker.internal:5672",
+      "queueName": "commitments.discovered",
+      "enabled": true
     }
   ]
 }

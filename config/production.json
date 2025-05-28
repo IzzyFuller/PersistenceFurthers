@@ -1,16 +1,16 @@
 {
   "exchanges": [
     {
-      "name": "AuDHDLifeCoachCore",
-      "connectionString": "amqp://rabbitmq:5672",
+      "name": "audhd.input",
+      "connectionString": "amqp://host.docker.internal:5672",
       "queueName": "core.messages",
-      "active": true
+      "enabled": true
     },
     {
-      "name": "CommitmentDiscovery",
-      "connectionString": "amqp://rabbitmq:5672",
+      "name": "audhd.output",
+      "connectionString": "amqp://host.docker.internal:5672",
       "queueName": "commitments.discovered",
-      "active": true
+      "enabled": true
     }
   ]
 }
